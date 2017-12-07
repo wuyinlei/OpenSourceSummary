@@ -22,5 +22,7 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("ruolan.com.opensourcesummary", appContext.getPackageName());
+
+        TestRetrofit.getData();
     }
 }
