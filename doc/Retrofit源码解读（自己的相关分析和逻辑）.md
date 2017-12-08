@@ -3,7 +3,7 @@
 标签（空格分隔）： Retrofit
 
 ---
-####写在前面
+#### 写在前面
 在没有开源网络请求框架的时候，我们的最简单的一个网络请求是这样的
 ![](http://ww1.sinaimg.cn/large/006jcGvzgy1fdfdpmbttdj30ny0gq0sw)
 
@@ -123,10 +123,10 @@ return new Retrofit(callFactory, baseUrl, converterFactories, adapterFactories,
 然后这个时候我们如果没有加入RxJava的话，我们就得到了一个转换好的Call对象  这个时候我们可以调用call.enqueue方法，传入Callback回调  我们就可以通过回调回来的***onResponse和onFailure来处理数据了***
 
 
-####大致分析
+#### 大致分析
 >首先通过Builder模式构建一个Retrofit对象，在build里面我们对retrofit进行了基本的配置，首先配置OkHttpClient,然后🈶Executor(可以从外部传入，当然也可以使用android默认的handler来作为主线程的),然后到后面的CallAdapter,如果我们不传进去,那么就会创建一个默认的defaultCCallAdapterFactory,也就是ExecutorCallAdapterFactory这个类  这个时候我们就创建了callFactory, baseUrl, converterFactories, adapterFactories,callbackExecutor, validateEagerly这么多的对象,然后接着返回一个Retrofit对象,然后这个Retrofit对象通过retrofit.create(api.class),创建一个Api的一个动态代理,当我们调用api的方法的时候,动态代理会去拦截,首先通过ServiceMethod来分析方法上面的注解,来拼成OkHttpClient所需要的请求参数,传递给OkHttpCall,在然后通过serviceMethod.callAdapter.adapt(okHttpCall)将okHttpCall做一次适配,变成ExecutorCallbackCall。这里的这个能做些什么事情呢->就是讲okHttpCall在包装一层,因为okHttpCall在执行的时候是异步的,而我们最终需要的是在主线程的回调，所以他做的就是把子线程的回调最终通过主线程的handler来会带哦到主线程的回调(这也就是为什么我们通过enqueue方法回调之后的结果或者错误已经在主线程了)
 
-###Retrofit套路
+### Retrofit套路
 >Retrofit  build
 Rtrofit create proxy for API interface
 API method intercepted by proxy
@@ -135,7 +135,7 @@ build HttpCall with params
 CallAdapter adapts Call To t
 enqueue() waiting for callback
 
-###Retrofit流程图
+### Retrofit流程图
 ![](http://ww1.sinaimg.cn/large/006jcGvzgy1fdfbarpqs8j30or0negny)
 
 >流程分析
