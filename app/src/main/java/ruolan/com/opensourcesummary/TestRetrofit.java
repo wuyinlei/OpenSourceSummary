@@ -16,6 +16,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by wuyinlei on 2017/12/7.
+ *
+ * @function
  */
 
 public class TestRetrofit {
@@ -26,15 +28,13 @@ public class TestRetrofit {
         builder.connectTimeout(10, TimeUnit.SECONDS);
 
 
-        Retrofit retrofit = new Retrofit.Builder()
+        return new Retrofit.Builder()
                 .client(builder.build())
                 .baseUrl("http://m2.qiushibaike.com/")  //设置请求网络地址的url(基地址  这个地址一定要"/"结尾  要不会出现问题)
                 .addConverterFactory(GsonConverterFactory.create()) //设置数据解析器  默认使用的Gson
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create()) //设置支持RxJava转换器
                 .build();
 
-
-        return retrofit;
     }
 
     public static void getData(){
