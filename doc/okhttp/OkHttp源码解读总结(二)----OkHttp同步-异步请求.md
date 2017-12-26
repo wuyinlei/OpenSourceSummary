@@ -1,4 +1,4 @@
-﻿# OkHttp源码解读总结(二)--->OkHttp同步/异步请求
+# OkHttp源码解读总结(二)--->OkHttp同步/异步请求
 
 标签（空格分隔）： OkHttp源码 学习笔记
 
@@ -58,7 +58,8 @@ new OkHttpClient.Builder()
                 .writeTimeout(10000, TimeUnit.MICROSECONDS)
                 .build()
 ```
-代表着okhttp请求的客户端类,很多的功能需要这个客户端类进行转发或者实现,而他的创建主要有两种方法
+代表着okhttp请求的客户端类,很多的功能需要这个客户端类进行转发或者实现,而他的创建主要有两种方法:
+
 * 第一种方法
     * new OkHttpClient()
 * 第二种方法
